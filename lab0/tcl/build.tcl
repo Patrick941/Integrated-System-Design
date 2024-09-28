@@ -23,9 +23,6 @@ route_design
 # Generate bitstream
 write_bitstream -force "bitstream/lab0_top.bit"
 
-file delete -force vivado.log
-file delete -force vivado.jou
-
 # Close the design
 close_design
 
