@@ -1,0 +1,220 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0" version="24.7.16">
+  <diagram name="Page-1" id="45Re28EgCKUjAgXOeZ8-">
+    <mxGraphModel dx="1195" dy="683" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-1" target="rpGg_NkyrXLdg2qVHryG-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-4" value="10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-3">
+          <mxGeometry x="-0.19" y="-20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-1" target="rpGg_NkyrXLdg2qVHryG-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-27" value="01" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-26">
+          <mxGeometry x="-0.1667" y="20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-1" value="S&lt;sub&gt;0&lt;/sub&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="350" y="260" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-2" target="rpGg_NkyrXLdg2qVHryG-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-14" value="01|11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-8">
+          <mxGeometry x="-0.3267" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;curved=1;fillColor=#f8cecc;strokeColor=#b85450;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-2" target="rpGg_NkyrXLdg2qVHryG-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-10" value="00" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-9">
+          <mxGeometry x="0.2414" y="-13" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-2" value="S&lt;sub&gt;1&lt;/sub&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="390" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-5" target="rpGg_NkyrXLdg2qVHryG-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-5" value="&lt;div&gt;Reset&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="360" y="150" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;curved=1;fillColor=#f8cecc;strokeColor=#b85450;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-7" target="rpGg_NkyrXLdg2qVHryG-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="582" />
+              <mxPoint x="600" y="459" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-16" value="10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-15">
+          <mxGeometry x="0.041" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#d5e8d4;strokeColor=#82b366;curved=1;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-7" target="rpGg_NkyrXLdg2qVHryG-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="750" />
+              <mxPoint x="390" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-23" value="00" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-21">
+          <mxGeometry x="-0.4823" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-7" value="S2" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="570" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;curved=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-2" target="rpGg_NkyrXLdg2qVHryG-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="568" y="380" />
+              <mxPoint x="620" y="380" />
+              <mxPoint x="620" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-13" value="&lt;div&gt;10&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-12">
+          <mxGeometry x="0.0554" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-7" target="rpGg_NkyrXLdg2qVHryG-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="512" y="560" />
+              <mxPoint x="460" y="560" />
+              <mxPoint x="460" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-18" value="01|11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-17">
+          <mxGeometry x="-0.2037" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-1" target="rpGg_NkyrXLdg2qVHryG-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="272" />
+              <mxPoint x="460" y="230" />
+              <mxPoint x="390" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-20" value="00" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-19">
+          <mxGeometry x="0.0275" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-24" value="Entered Goes High" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="410" y="760" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=1;entryDx=0;entryDy=0;fillColor=#f8cecc;strokeColor=#b85450;curved=1;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-25" target="rpGg_NkyrXLdg2qVHryG-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-29" value="00" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-28">
+          <mxGeometry x="0.2414" y="14" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-25" target="rpGg_NkyrXLdg2qVHryG-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-34" value="10|11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-33">
+          <mxGeometry x="-0.1933" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-25" value="S&lt;sub&gt;3&lt;/sub&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="200" y="390" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-25" target="rpGg_NkyrXLdg2qVHryG-25">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="212" y="370" />
+              <mxPoint x="160" y="370" />
+              <mxPoint x="160" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-31" value="01" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-30">
+          <mxGeometry x="0.013" y="6" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;curved=1;fillColor=#f8cecc;strokeColor=#b85450;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-32" target="rpGg_NkyrXLdg2qVHryG-25">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="582" />
+              <mxPoint x="180" y="458" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-41" value="01" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-40">
+          <mxGeometry x="0.0054" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-32" value="S4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="200" y="570" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;curved=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="rpGg_NkyrXLdg2qVHryG-32" target="rpGg_NkyrXLdg2qVHryG-32">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="268" y="560" />
+              <mxPoint x="310" y="560" />
+              <mxPoint x="310" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-38" value="10|11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-37">
+          <mxGeometry x="0.0166" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#d5e8d4;strokeColor=#82b366;curved=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="340" as="sourcePoint" />
+            <mxPoint x="240" y="650" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="390" y="750" />
+              <mxPoint x="240" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-43" value="00" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-42">
+          <mxGeometry x="-0.4823" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-44" value="00" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rpGg_NkyrXLdg2qVHryG-42">
+          <mxGeometry x="0.5152" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-45" value="Exited Goes High" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="230" y="758" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-46" value="Entered Goes Low" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="420" y="270" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rpGg_NkyrXLdg2qVHryG-47" value="Exited Goes Low" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="240" y="270" width="120" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
