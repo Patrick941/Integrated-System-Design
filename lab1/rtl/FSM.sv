@@ -54,12 +54,16 @@ module FSM (
                     next_state = 3'b000;
                 else if (a && b)
                     next_state = 3'b100;
+                else if (a && !b)
+                    next_state = 3'b100;
             end
             3'b100: begin
                 if (!a && !b) begin
                     next_state = 3'b000;
                     exited = 1;
                 end else if (!a && b)
+                    next_state = 3'b011;
+                else if (a && b)
                     next_state = 3'b011;
             end
         endcase
