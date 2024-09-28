@@ -4,7 +4,7 @@ set testbench_name "testbenches/FSM_tb.sv"
 
 # Check if the project exists, if not create it
 if {![file exists $project_name]} {
-    create_project $project_name
+    create_project $project_name -force
 }
 
 # Launch the simulation
