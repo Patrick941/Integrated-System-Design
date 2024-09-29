@@ -2,7 +2,7 @@ module counter (
     input clk,
     input reset,
     input [3:0] btn,
-    output [7:0] count,
+    output [3:0] count,
     output [2:0] debug_state
 );
 
@@ -11,7 +11,7 @@ module counter (
     wire [2:0] next_state;
     wire entered;
     wire exited;
-    reg [7:0] count_reg;
+    reg [3:0] count_reg;
 
     
     FSM u_fsm (
@@ -27,7 +27,7 @@ module counter (
     
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            count_reg <= 8'b0;
+            count_reg <= 4'b0;
             current_state <= 3'b000;
         end else begin
             current_state <= next_state;

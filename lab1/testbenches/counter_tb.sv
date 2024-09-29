@@ -4,7 +4,7 @@ module counter_tb;
   reg clk;
   reg reset;
   reg [3:0] btn;
-  reg [7:0] count;
+  reg [3:0] count;
   wire [2:0] debug_state;
 
   // Instantiate the counter module

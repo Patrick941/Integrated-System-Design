@@ -1,29 +1,20 @@
-# Define project variables
-set board_part "xc7z020clg400-1"  ;# PYNQ-Z2 board part
-set constraints_file "constraints/PYNQ-Z2v1.0.xdc"  ;# Replace with your actual constraints file
+set board_part "xc7z020clg400-1"  
+set constraints_file "constraints/PYNQ-Z2v1.0.xdc" 
 read_xdc $constraints_file 
-set sources [list "rtl/lab1_top.sv"]  ;# Replace with your actual source files
+set sources [list "rtl/top.sv" "rtl/FSM.sv" "rtl/debouncer.sv" "rtl/counter.sv"]
 
-# Set the target part
 set_part $board_part
 
-# Add sources to the project
 foreach source $sources {
     read_verilog $source
 }
 
-# Set the top module
-synth_design -top lab0_top  ;# Replace 'lab0_top' with the actual top module name
+synth_design -top top 
 
-# Run implementation
 opt_design
 place_design
 route_design
 
-# Generate bitstream
-write_bitstream -force "bitstream/lab1_top.bit"
+write_bitstream -force "bitstream/top.bit"
 
-# Close the design
 close_design
-
-
