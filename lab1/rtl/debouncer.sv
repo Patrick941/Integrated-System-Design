@@ -55,8 +55,9 @@ module debouncer #(parameter threshold = 100000 )// set parameter thresehold to 
         count <= count-1; //when btn relesed, count down 
       end 
     end 
-    if (count > threshold) begin//if the count is greater the threshold 
+    if (count > threshold && button) begin//if the count is greater the threshold 
       button_db <= 1; //debounced signal is 1 
+      count <= threshold + 1; //reset the count to 0
     end else begin 
       button_db <= 0; //debounced signal is 0 
     end

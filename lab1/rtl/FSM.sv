@@ -9,21 +9,19 @@ module FSM (
 );
 
     wire a, b;
-    assign a = btn[0];
-    assign b = btn[1];
 
-    // debouncer #(.threshold(100000)) u_debouncer_a (
-    //     .clk(clk),
-    //     .reset(reset),
-    //     .button(btn[0]),
-    //     .button_db(a)
-    // );
-    // debouncer #(.threshold(100000)) u_debouncer_b (
-    //     .clk(clk),
-    //     .reset(reset),
-    //     .button(btn[1]),
-    //     .button_db(b)
-    // );
+    debouncer #(.threshold(1)) u_debouncer_a (
+        .clk(clk),
+        .reset(reset),
+        .button(btn[0]),
+        .button_db(a)
+    );
+    debouncer #(.threshold(1)) u_debouncer_b (
+        .clk(clk),
+        .reset(reset),
+        .button(btn[1]),
+        .button_db(b)
+    );
 
     always @(posedge clk) begin
         next_state = current_state;

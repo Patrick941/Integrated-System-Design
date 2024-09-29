@@ -1,8 +1,7 @@
-# Define the project and testbench
 set project_name "lab1_temp"
-set testbench_name "testbenches/FSM_tb.sv"
+set testbench_name "testbenches/counter_tb.sv"
+set tb_name [file rootname [file tail $testbench_name]]
 
-# Check if the project exists, if not create it
 if {![file exists $project_name]} {
     create_project $project_name -part xc7z020clg400-1
 }
@@ -25,29 +24,25 @@ foreach file [get_files -of_objects [get_filesets sources_1]] {
 }
 
 add_files -fileset sim_1 $testbench_name
-set_property top "FSM_tb" [get_fileset sim_1]
+set_property top $tb_name [get_fileset sim_1]
 
 
 launch_simulation
+run 14000ns
 
-set curr_wave [current_wave_config]
-if { [string length $curr_wave] == 0 } {
-  if { [llength [get_objects]] > 0} {
-    add_wave /
-    set_property needs_save false [current_wave_config]
-  } else {
-     send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
-  }
-}
-run 1000ns
-log_wave -recursive * 
-# Extract the testbench name without the path and extension
-set tb_name [file rootname [file tail $testbench_name]]
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+# log_wave -recursive * 
+# set tb_name [file rootname [file tail $testbench_name]]
+# file copy -force "lab1_temp.sim/sim_1/behav/xsim/${tb_name}_behav.wdb" "sim_output/${tb_name}_behav.wdb"
 
-# Copy the waveform database file to the desired location
-file copy -force "lab1_temp.sim/sim_1/behav/xsim/${tb_name}_behav.wdb" "sim_output/${tb_name}_behav.wdb"
-
-
-# Close the project
 close_project
 quit
