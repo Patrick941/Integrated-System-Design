@@ -31,7 +31,7 @@ module counter (
             current_state <= 3'b000;
         end else begin
             current_state <= next_state;
-            if (entered && current_state == 3'b011) begin
+            if (entered && current_state == 3'b011 && count_reg != 4'b1111) begin
                 count_reg <= count_reg + 1;
             end
             if (exited && current_state == 3'b110 && count_reg != 4'b0000) begin

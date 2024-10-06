@@ -4,7 +4,8 @@ module stim_gen (
     output reg a,
     output reg b,
     output reg inc_exp,
-    output reg dec_exp
+    output reg dec_exp,
+    output wire [3:0] count
 );
     wire [3:0] count;
     wire [2:0] debug_state;
