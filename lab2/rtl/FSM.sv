@@ -34,40 +34,83 @@ module FSM (
             exited = 0;
             case (current_state)
                 3'b000: begin
-                    if (a && !b)
+                    if (a && !b) begin
                         next_state = 3'b001;
-                    else if (!a && b)
-                        next_state = 3'b011;
+                    end
+                    else if (a && b) begin
+                        next_state = 3'b000; // Should never occur return to default state
+                    end
+                    else if (!a && b) begin
+                        next_state = 3'b100;
+                    end
                 end
                 3'b001: begin
-                    if (!a && !b)
+                    if (!a && !b) begin
                         next_state = 3'b000;
-                    else if (!a && b)
+                    end
+                    else if (a && b) begin
                         next_state = 3'b010;
+                    end
+                    else if (!a && b) begin
+                        next_state = 3'b000; // Should never occur return to default state
+                    end
                 end
                 3'b010: begin
                     if (!a && !b) begin
-                        next_state = 3'b000;
-                        entered = 1;
-                    end else if (a && !b)
+                        next_state = 3'b000; // Should never occur return to default state
+                    end
+                    else if (a && !b) begin
                         next_state = 3'b001;
+                    end
+                    else if (!a && b) begin
+                        next_state = 3'b011;
+                    end
                 end
                 3'b011: begin
-                    if (!a && !b)
+                    if (a && !b) begin
+                        next_state = 3'b000; // Should never occur return to default state
+                    end
+                    else if (a && b) begin
+                        next_state = 3'b010;
+                    end
+                    else if (!a && !b) begin
                         next_state = 3'b000;
-                    else if (a && b)
-                        next_state = 3'b100;
-                    else if (a && !b)
-                        next_state = 3'b100;
+                        entered = 1;
+                    end
                 end
                 3'b100: begin
+                    if (a && !b) begin
+                        next_state = 3'b000; // Should never occur return to default state
+                    end
+                    else if (!a && !b) begin
+                        next_state = 3'b000;
+                    end
+                    else if (a && b) begin
+                        next_state = 3'b101;
+                    end
+                end
+                3'b101: begin
                     if (!a && !b) begin
+                        next_state = 3'b000; // Should never occur return to default state
+                    end
+                    else if (a && !b) begin
+                        next_state = 3'b110;
+                    end
+                    else if (!a && b) begin
+                        next_state = 3'b100;
+                    end
+                end
+                3'b110: begin
+                    if (!a && b) begin
+                        next_state = 3'b000; // Should never occur return to default state
+                    end
+                    else if (a && b) begin
+                        next_state = 3'b101;
+                    end
+                    else if (!a && !b) begin
                         next_state = 3'b000;
                         exited = 1;
-                    end else if (!a && b)
-                        next_state = 3'b011;
-                    else if (a && b)
-                        next_state = 3'b011;
+                    end
                 end
             endcase
         end
