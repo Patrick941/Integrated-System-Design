@@ -9,8 +9,15 @@ wire [3:0] count;
         .a(a),
         .b(b),
         .inc_exp(inc_exp),
-        .dec_exp(dec_exp),
-        .count(count)
+        .dec_exp(dec_exp)
+    );
+
+    counter u_counter (
+        .clk(clk),
+        .reset(reset),
+        .btn({b, a}),
+        .count(count),
+        .debug_state()
     );
 
     scoreboard u_scoreboard (
@@ -20,10 +27,5 @@ wire [3:0] count;
         .dec_exp(dec_exp),
         .count(count)
     );
-
-    // initial begin
-    //     $monitor("reset=%b a=%b b=%b inc_exp=%b dec_exp=%b", reset, a, b, inc_exp, dec_exp);
-    // end
-
 
 endmodule

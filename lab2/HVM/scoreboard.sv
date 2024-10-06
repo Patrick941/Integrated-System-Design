@@ -36,7 +36,6 @@ module scoreboard (
     end
 
     always @(posedge inc_exp or posedge dec_exp) begin
-        // #100;
         $fwrite(file, "Count: %0d, Local Count: %0d\n", count, local_count);
         $fflush(file);
     end

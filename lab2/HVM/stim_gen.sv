@@ -4,8 +4,7 @@ module stim_gen (
     output reg a,
     output reg b,
     output reg inc_exp,
-    output reg dec_exp,
-    output wire [3:0] count
+    output reg dec_exp
 );
     wire [3:0] count;
     wire [2:0] debug_state;
@@ -44,14 +43,6 @@ module stim_gen (
         generate_exited;
         $finish;
     end
-
-    counter u_counter (
-        .clk(clk),
-        .reset(reset),
-        .btn({b, a}),
-        .count(count),
-        .debug_state(debug_state)
-    );
 
     task automatic generate_entered;
         begin
