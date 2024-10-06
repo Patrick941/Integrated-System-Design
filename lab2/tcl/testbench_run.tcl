@@ -1,5 +1,5 @@
 set project_name "lab_temp"
-set testbench_name "testbenches/counter_tb.sv"
+set testbench_name "HVM/stim_gen.sv"
 set tb_name [file rootname [file tail $testbench_name]]
 
 if {![file exists $project_name]} {
@@ -28,7 +28,7 @@ set_property top $tb_name [get_fileset sim_1]
 
 
 launch_simulation
-run 14000ns
+run all
 
 # set curr_wave [current_wave_config]
 # if { [string length $curr_wave] == 0 } {
