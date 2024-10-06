@@ -10,6 +10,9 @@ module stim_gen (
     wire [2:0] debug_state;
     reg [2:0] state_tracker;
 
+    reg [2:0] faildepth;
+    reg failed;
+
     initial begin
         clk = 0;
         a = 0;
@@ -26,13 +29,15 @@ module stim_gen (
     end
 
     initial begin
-        $monitor("reset=%b a=%b b=%b inc_exp=%b dec_exp=%b count=%b debug_state=%b", reset, a, b, inc_exp, dec_exp, count, debug_state);
-    end
-
-    initial begin
         generate_entered;
         generate_entered;
         generate_entered;
+        generate_fail_entered;
+        generate_fail_entered;
+        generate_fail_entered;
+        generate_fail_exited;
+        generate_fail_exited;
+        generate_fail_exited;
         generate_exited;
         generate_exited;
         generate_exited;
@@ -93,8 +98,8 @@ module stim_gen (
 
     task automatic generate_fail_entered;
         begin
-            faildepth = $urandom_range(0, 3);
-            failed = 0
+            faildepth = $urandom_range(0, 2);
+            failed = 0;
             state_tracker = 0;
             a = 0;
             b = 0;
@@ -108,9 +113,9 @@ module stim_gen (
                         #1000;
                     end
                     else begin
-                        a = 0;
-                        b = $urandom_range(0, 1);
-                        if ( b == 0) begin
+                        b = 0;
+                        a = $urandom_range(0, 1);
+                        if ( a == 1) begin
                             state_tracker = 1;
                         end
                         #1000;
@@ -124,9 +129,9 @@ module stim_gen (
                         #1000;
                     end
                     else begin
-                        b = 0;
-                        a = $urandom_range(0, 1);
-                        if ( a == 1) begin
+                        a = 1;
+                        b = $urandom_range(0, 1);
+                        if ( b == 1) begin
                             state_tracker = 2;
                         end
                         #1000;
@@ -140,9 +145,9 @@ module stim_gen (
                         #1000;
                     end
                     else begin
-                        a = 1;
-                        b = $urandom_range(0, 1);
-                        if ( b == 1) begin
+                        b = 1;
+                        a = $urandom_range(0, 1);
+                        if ( a == 0) begin
                             state_tracker = 3;
                         end
                         #1000;
@@ -205,13 +210,13 @@ module stim_gen (
 
     task automatic generate_fail_exited;
         begin
-            faildepth = $urandom_range(0, 3);
-            failed = 0
+            faildepth = $urandom_range(0, 2);
+            failed = 0;
             state_tracker = 0;
             a = 0;
             b = 0;
             #1000;
-            while (dec_exp == 0) begin
+            while (failed == 0) begin
                 if ( state_tracker == 0 ) begin
                     if (faildepth == 0) begin
                         a = 1;
@@ -223,7 +228,7 @@ module stim_gen (
                         a = 0;
                         b = $urandom_range(0, 1);
                         if ( b == 0) begin
-                            state_tracker = 1;
+                            state_tracker = 4;
                         end
                         #1000;
                     end
@@ -239,7 +244,7 @@ module stim_gen (
                         b = 1;
                         a = $urandom_range(0, 1);
                         if ( a == 1) begin
-                            state_tracker = 2;
+                            state_tracker = 5;
                         end
                         #1000;
                     end
@@ -258,12 +263,13 @@ module stim_gen (
                             state_tracker = 6;
                         end
                         #1000;
+                    end
                 end
                 else if ( state_tracker == 6 ) begin
                         b = 1;
                         a = 0;
                         failed = 1;
-                        #1000
+                        #1000;
                 end
             end 
             dec_exp = 0;

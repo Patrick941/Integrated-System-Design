@@ -1,11 +1,11 @@
 set project_name "lab_temp"
-set testbench_name "HVM/stim_gen.sv"
+set testbench_name "HVM/top_tb.sv"
 set tb_name [file rootname [file tail $testbench_name]]
 
 if {![file exists $project_name]} {
     create_project $project_name -part xc7z020clg400-1
 }
-set directories [list "rtl"]
+set directories [list "rtl" "HVM"]
 foreach dir $directories {
     set sv_files [glob -nocomplain -directory $dir *.sv *.v]
     foreach file $sv_files {
@@ -29,6 +29,7 @@ set_property top $tb_name [get_fileset sim_1]
 
 launch_simulation
 run all
+
 
 # set curr_wave [current_wave_config]
 # if { [string length $curr_wave] == 0 } {
