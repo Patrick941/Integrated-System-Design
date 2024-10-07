@@ -29,9 +29,9 @@ module scoreboard (
         if (reset) begin
             local_count <= 0;
         end else begin
-            if (inc_exp && !prev_inc_exp) begin
+            if (inc_exp && !prev_inc_exp && local_count != 4'b1111) begin
                 local_count <= local_count + 1;
-            end else if (dec_exp && !prev_dec_exp) begin
+            end else if (dec_exp && !prev_dec_exp && local_count != 4'b0000) begin
                 local_count <= local_count - 1;
             end
         end
