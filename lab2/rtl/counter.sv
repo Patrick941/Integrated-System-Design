@@ -3,7 +3,9 @@ module counter (
     input reset,
     input [3:0] btn,
     output [3:0] count,
-    output [2:0] debug_state
+    output [2:0] debug_state,
+    output inc_act,
+    output dec_act
 );
 
     
@@ -12,6 +14,9 @@ module counter (
     wire entered;
     wire exited;
     reg [3:0] count_reg;
+
+    assign inc_act = entered;
+    assign dec_act = exited;
 
     
     FSM u_fsm (

@@ -3,7 +3,11 @@ module scoreboard (
     input reset,
     input inc_exp,
     input dec_exp,
-    input [3:0] count
+    input [3:0] count,
+    input a,
+    input b,
+    input inc_act,
+    input dec_act
 );
     reg [3:0] local_count;
 
@@ -36,8 +40,14 @@ module scoreboard (
     end
 
     always @(posedge inc_exp or posedge dec_exp) begin
-        $fwrite(file, "Count: %0d, Local Count: %0d\n", count, local_count);
-        $fflush(file);
+        if (local_count != count || inc_act != inc_exp || dec_act != dec_exp) begin
+            $fwrite(file, "FAIL: Count: %0d, Local Count: %0d, a: %0d, b: %0d, inc_act: %0d, dec_act: %0d, Expected inc: %0d, Expected dec: %0d\n", count, local_count, a, b, inc_act, dec_act, inc_exp, dec_exp);
+            $fflush(file);
+        end
+        else begin
+            $fwrite(file, "PASS: Count: %0d, Local Count: %0d, a: %0d, b: %0d, inc_act: %0d, dec_act: %0d, Expected inc: %0d, Expected dec: %0d\n", count, local_count, a, b, inc_act, dec_act, inc_exp, dec_exp);
+            $fflush(file);
+        end
     end
 
     final begin

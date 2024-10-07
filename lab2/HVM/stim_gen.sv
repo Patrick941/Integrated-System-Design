@@ -49,7 +49,7 @@ module stim_gen (
             state_tracker = 0;
             a = 0;
             b = 0;
-            #1000;
+            #100;
             while (inc_exp == 0) begin
                 if ( state_tracker == 0 ) begin
                     b = 0;
@@ -57,7 +57,7 @@ module stim_gen (
                     if ( a == 1) begin
                         state_tracker = 1;
                     end
-                    #1000;
+                    #100;
                 end
                 else if ( state_tracker == 1 ) begin
                     a = 1;
@@ -65,7 +65,7 @@ module stim_gen (
                     if ( b == 1) begin
                         state_tracker = 2;
                     end
-                    #1000;
+                    #100;
                 end
                 else if ( state_tracker == 2 ) begin
                     b = 1;
@@ -73,15 +73,16 @@ module stim_gen (
                     if ( a == 0) begin
                         state_tracker = 3;
                     end
-                    #1000;
+                    #100;
                 end
                 else if ( state_tracker == 3 ) begin
                     a = 0;
                     b = $urandom_range(0, 1);
                     if ( b == 0) begin
+                        #20;
                         inc_exp = 1;
                     end
-                    #1000;
+                    #100;
                 end
             end 
             inc_exp = 0;
@@ -95,14 +96,14 @@ module stim_gen (
             state_tracker = 0;
             a = 0;
             b = 0;
-            #1000;
+            #100;
             while (failed == 0) begin
                 if ( state_tracker == 0 ) begin
                     if (faildepth == 0) begin
                         a = 1;
                         b = 1;
                         failed = 1;
-                        #1000;
+                        #100;
                     end
                     else begin
                         b = 0;
@@ -110,7 +111,7 @@ module stim_gen (
                         if ( a == 1) begin
                             state_tracker = 1;
                         end
-                        #1000;
+                        #100;
                     end
                 end
                 else if ( state_tracker == 1 ) begin
@@ -118,7 +119,7 @@ module stim_gen (
                         a = 0;
                         b = 1;
                         failed = 1;
-                        #1000;
+                        #100;
                     end
                     else begin
                         a = 1;
@@ -126,7 +127,7 @@ module stim_gen (
                         if ( b == 1) begin
                             state_tracker = 2;
                         end
-                        #1000;
+                        #100;
                     end
                 end
                 else if ( state_tracker == 2 ) begin
@@ -134,7 +135,7 @@ module stim_gen (
                         b = 0;
                         a = 0;
                         failed = 1;
-                        #1000;
+                        #100;
                     end
                     else begin
                         b = 1;
@@ -142,14 +143,14 @@ module stim_gen (
                         if ( a == 0) begin
                             state_tracker = 3;
                         end
-                        #1000;
+                        #100;
                     end
                 end
                 else if ( state_tracker == 3 ) begin
                     a = 1;
                     b = 0;
                     failed = 1;
-                    #1000;
+                    #100;
                 end
             end 
             inc_exp = 0;
@@ -161,7 +162,7 @@ module stim_gen (
             state_tracker = 0;
             a = 0;
             b = 0;
-            #1000;
+            #100;
             while (dec_exp == 0) begin
                 if ( state_tracker == 0 ) begin
                     a = 0;
@@ -169,7 +170,7 @@ module stim_gen (
                     if ( b == 1) begin
                         state_tracker = 4;
                     end
-                    #1000;
+                    #100;
                 end
                 else if ( state_tracker == 4 ) begin
                     b = 1;
@@ -177,7 +178,7 @@ module stim_gen (
                     if ( a == 1) begin
                         state_tracker = 5;
                     end
-                    #1000;
+                    #100;
                 end
                 else if ( state_tracker == 5 ) begin
                     a = 1;
@@ -185,15 +186,16 @@ module stim_gen (
                     if ( b == 0) begin
                         state_tracker = 6;
                     end
-                    #1000;
+                    #100;
                 end
                 else if ( state_tracker == 6 ) begin
                     b = 0;
                     a = $urandom_range(0, 1);
                     if ( a == 0) begin
+                        #20;
                         dec_exp = 1;
                     end
-                    #1000;
+                    #100;
                 end
             end 
             dec_exp = 0;
@@ -207,14 +209,14 @@ module stim_gen (
             state_tracker = 0;
             a = 0;
             b = 0;
-            #1000;
+            #100;
             while (failed == 0) begin
                 if ( state_tracker == 0 ) begin
                     if (faildepth == 0) begin
                         a = 1;
                         b = 1;
                         failed = 1;
-                        #1000;
+                        #100;
                     end
                     else begin
                         a = 0;
@@ -222,7 +224,7 @@ module stim_gen (
                         if ( b == 0) begin
                             state_tracker = 4;
                         end
-                        #1000;
+                        #100;
                     end
                 end
                 else if ( state_tracker == 4 ) begin
@@ -230,7 +232,7 @@ module stim_gen (
                         b = 0;
                         a = 1;
                         failed = 1;
-                        #1000;
+                        #100;
                     end
                     else begin
                         b = 1;
@@ -238,7 +240,7 @@ module stim_gen (
                         if ( a == 1) begin
                             state_tracker = 5;
                         end
-                        #1000;
+                        #100;
                     end
                 end
                 else if ( state_tracker == 5 ) begin
@@ -246,7 +248,7 @@ module stim_gen (
                         a = 0;
                         b = 0;
                         failed = 1;
-                        #1000;
+                        #100;
                     end
                     else begin
                         a = 1;
@@ -254,14 +256,14 @@ module stim_gen (
                         if ( b == 0) begin
                             state_tracker = 6;
                         end
-                        #1000;
+                        #100;
                     end
                 end
                 else if ( state_tracker == 6 ) begin
                         b = 1;
                         a = 0;
                         failed = 1;
-                        #1000;
+                        #100;
                 end
             end 
             dec_exp = 0;
