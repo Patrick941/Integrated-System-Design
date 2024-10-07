@@ -1,4 +1,5 @@
 module scoreboard (
+    // Declare module inputs and outputs
     input clk,
     input reset,
     input inc_exp,
@@ -10,12 +11,13 @@ module scoreboard (
     input dec_act,
     output reg [3:0] local_count
 );
+    // Declare local signals for tracking counter
     reg [3:0] local_count;
-
     reg prev_inc_exp;
     reg prev_dec_exp;
     integer file;
 
+    // Open file for writing
     initial begin
         file = $fopen("HVM.log", "w");
         if (file == 0) begin
@@ -26,6 +28,7 @@ module scoreboard (
         end
     end
 
+    // Create the counter logic for the expected count from the expected increment and expected decrement
     always @(posedge clk) begin
         if (reset) begin
             local_count <= 0;
@@ -40,6 +43,7 @@ module scoreboard (
         prev_dec_exp <= dec_exp;
     end
 
+    // Compare the expected and actual values of the counter and write to the file
     // always @(count) begin // Reduced verbosity sensitivity list
     always @(inc_act or dec_act or count) begin
         if (local_count != count || inc_act != inc_exp || dec_act != dec_exp) begin
@@ -52,11 +56,13 @@ module scoreboard (
         end
     end
 
+    // Close file when simulation is done
     final begin
         $fclose(file);
         $display("File closed successfully");
     end
 
+    // Reset the local count when reset is high
     always @(posedge reset) begin
         local_count <= 0;
     end

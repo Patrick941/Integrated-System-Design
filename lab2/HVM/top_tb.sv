@@ -1,8 +1,9 @@
 module top_tb ();
-
+// Declare internal signals for connecting modules
 wire clk, reset, a, b, inc_exp, dec_exp, inc_act, dec_act;
 wire [3:0] count, local_count;
    
+    // Instantiate the clock generator
     stim_gen u_stim_gen (
         .clk(clk),
         .reset(reset),
@@ -12,6 +13,7 @@ wire [3:0] count, local_count;
         .dec_exp(dec_exp)
     );
 
+    // Instantiate the counter module
     counter u_counter (
         .clk(clk),
         .reset(reset),
@@ -22,6 +24,7 @@ wire [3:0] count, local_count;
         .dec_act(dec_act)
     );
 
+    // Instantiate the scoreboard module
     scoreboard u_scoreboard (
         .clk(clk),
         .reset(reset),

@@ -1,4 +1,5 @@
 module counter (
+    // Declare module inputs and outputs
     input clk,
     input reset,
     input [3:0] btn,
@@ -8,17 +9,18 @@ module counter (
     output dec_act
 );
 
-    
+    // Declare internal signals
     reg [2:0] current_state;
     wire [2:0] next_state;
     wire entered;
     wire exited;
     reg [3:0] count_reg;
 
+    // Assign output signals of increment and decrement from entered and exited
     assign inc_act = entered;
     assign dec_act = exited;
 
-    
+    // Instantiate the FSM module
     FSM u_fsm (
         .clk(clk),
         .reset(reset),
@@ -29,7 +31,7 @@ module counter (
         .exited(exited)
     );
 
-    
+    // Implement the counter logic using entered and exited signals
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             count_reg <= 4'b0;
@@ -45,7 +47,7 @@ module counter (
         end
     end
 
-    
+    // Assign the count and debug_state signals
     assign count = count_reg;
     assign debug_state = current_state;
 
