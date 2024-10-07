@@ -1,7 +1,7 @@
 module top_tb ();
 
 wire clk, reset, a, b, inc_exp, dec_exp, inc_act, dec_act;
-wire [3:0] count;
+wire [3:0] count, local_count;
    
     stim_gen u_stim_gen (
         .clk(clk),
@@ -31,7 +31,8 @@ wire [3:0] count;
         .a(a),
         .b(b),
         .inc_act(inc_act),
-        .dec_act(dec_act)
+        .dec_act(dec_act),
+        .local_count(local_count)
     );
 
 endmodule

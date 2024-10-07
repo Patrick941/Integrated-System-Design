@@ -14,7 +14,7 @@ module stim_gen (
     reg failed;
 
     initial begin
-        clk = 0;
+        clk = 1;
         a = 0;
         b = 0;
         inc_exp = 0;
@@ -75,10 +75,12 @@ module stim_gen (
                         a = 0;
                         b = $urandom_range(0, 1);
                         if ( b == 0) begin
-                            #20;
+                            #10;
                             inc_exp = 1;
+                            #20;
+                        end else begin
+                            #100;
                         end
-                        #100;
                     end
                 end 
                 inc_exp = 0;
@@ -194,10 +196,12 @@ module stim_gen (
                         b = 0;
                         a = $urandom_range(0, 1);
                         if ( a == 0) begin
-                            #20;
+                            #10;
                             dec_exp = 1;
+                            #20;
+                        end else begin
+                            #100;
                         end
-                        #100;
                     end
                 end 
                 dec_exp = 0;

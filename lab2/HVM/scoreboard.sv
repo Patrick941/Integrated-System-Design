@@ -7,7 +7,8 @@ module scoreboard (
     input a,
     input b,
     input inc_act,
-    input dec_act
+    input dec_act,
+    output reg [3:0] local_count
 );
     reg [3:0] local_count;
 
