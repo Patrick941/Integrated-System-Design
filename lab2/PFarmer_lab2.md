@@ -12,6 +12,16 @@ date: "2023-10-01"
 
 ## Implementation Details
 
+#### Role of Testbench Blocks
+
+#### Tested Scenarios
+And their expected results.
+
+#### Response to Bugs
+Intentional and unintentional
+
+#### Results
+
 ## Design Approach
 
 ## Reflections
