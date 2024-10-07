@@ -57,6 +57,7 @@ respectively. This fixed the bug and the actual and testbench signals now matche
 **Bug Insertion**\
 Bugs were inserted into the DUT in a number of places and the testbench run to see if the scoreboard could detect them. The bugs inserted were:
 1. **Capping Bug**\
+*(The following logs were made with smaller sensitivity lists for readability)*\
 This will mean that the count rolls round to 0 instead of capping. *Result: Successful Failure Capture*\
 ```log
 PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
@@ -103,7 +104,7 @@ PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc
 PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
 
 ```
-2. **State2 -> State3 Broken Link**\
+1. **State2 -> State3 Broken Link**\
 This will mean that the FSM will break part way through the entrance sequence. No entrance signals will go high and the count will not increment. *Result: Successful Failure Capture*\
 ```log
 FAIL: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 1, Expected dec: 0
@@ -149,7 +150,7 @@ PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc
 PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
 PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
 ```
-3. **State4 -> State0||State5 Broken Link**\
+1. **State4 -> State0||State5 Broken Link**\
 This will mean that the FSM will never leave state 4 and the FSM will hang. *Result: Successful Failure Capture*\
 ```log
 PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
@@ -195,7 +196,7 @@ FAIL: Count: 6, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc
 FAIL: Count: 6, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 1
 FAIL: Count: 6, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 1
 ```
-4. **State5 -> State6 Broken Link**\ 
+1. **State5 -> State6 Broken Link**\ 
 This will mean that the FSM will break part way through the exit sequence. No exit signals will go high and the count will not decrement. *Result: Successful Failure Capture*\
 ```log
 PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
@@ -241,7 +242,7 @@ FAIL: Count: 15, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected in
 FAIL: Count: 15, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 1
 FAIL: Count: 15, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 1
 ```
-5. **Broken Incrementer**\
+1. **Broken Incrementer**\
 The increment signal will go high but the count will not increment. *Result: Successful Failure Capture*\
 ```log
 PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
@@ -293,7 +294,126 @@ PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc
 As we can see from this first image, the FSM is working as expected. The count matches the expected count, the increment matches the expected increment and the decrement matches the expected decrement.\
 ![](FullWaves.png)\
 
-If we take a closer look at the waves, we can see that the waves do not match perfectly. The expected signals are updated half a period after the actual signals. This is due 
-![](ZoomedWaves.png)\
+If we take a closer look at the waves, we can see that the increment signals do match but we can see that the count is very slightly falling behind the expected count by one clock signal. This is due to the clock cycle that it takes for the FSM to increment the count.\
+![](ZoomedWaves.png)
+##### Full Log:
+```log
+PASS: Count: x, Local Count: x, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 1, Local Count: 1, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 1, Local Count: 1, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 1, Local Count: 1, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 2, Local Count: 2, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 2, Local Count: 2, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 2, Local Count: 2, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 3, Local Count: 3, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 3, Local Count: 3, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 3, Local Count: 3, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 4, Local Count: 4, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 4, Local Count: 4, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 4, Local Count: 4, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 5, Local Count: 5, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 5, Local Count: 5, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 5, Local Count: 5, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 6, Local Count: 6, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 6, Local Count: 6, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 6, Local Count: 6, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 7, Local Count: 7, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 7, Local Count: 7, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 7, Local Count: 7, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 8, Local Count: 8, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 8, Local Count: 8, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 8, Local Count: 8, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 9, Local Count: 9, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 9, Local Count: 9, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 9, Local Count: 9, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 10, Local Count: 10, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 10, Local Count: 10, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 10, Local Count: 10, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 11, Local Count: 11, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 11, Local Count: 11, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 11, Local Count: 11, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 12, Local Count: 12, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 12, Local Count: 12, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 12, Local Count: 12, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 13, Local Count: 13, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 13, Local Count: 13, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 13, Local Count: 13, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 14, Local Count: 14, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 14, Local Count: 14, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 14, Local Count: 14, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 1, dec_act: 0, Expected inc: 1, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 15, Local Count: 15, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 14, Local Count: 14, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 14, Local Count: 14, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 14, Local Count: 14, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 13, Local Count: 13, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 13, Local Count: 13, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 13, Local Count: 13, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 12, Local Count: 12, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 12, Local Count: 12, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 12, Local Count: 12, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 11, Local Count: 11, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 11, Local Count: 11, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 11, Local Count: 11, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 10, Local Count: 10, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 10, Local Count: 10, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 10, Local Count: 10, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 9, Local Count: 9, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 9, Local Count: 9, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 9, Local Count: 9, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 8, Local Count: 8, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 8, Local Count: 8, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 8, Local Count: 8, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 7, Local Count: 7, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 7, Local Count: 7, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 7, Local Count: 7, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 6, Local Count: 6, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 6, Local Count: 6, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 6, Local Count: 6, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 5, Local Count: 5, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 5, Local Count: 5, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 5, Local Count: 5, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 4, Local Count: 4, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 4, Local Count: 4, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 4, Local Count: 4, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 3, Local Count: 3, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 3, Local Count: 3, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 3, Local Count: 3, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 2, Local Count: 2, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 2, Local Count: 2, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 2, Local Count: 2, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 1, Local Count: 1, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 1, Local Count: 1, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 1, Local Count: 1, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 0, Expected inc: 0, Expected dec: 0
+PASS: Count: 0, Local Count: 0, a: 0, b: 0, inc_act: 0, dec_act: 1, Expected inc: 0, Expected dec: 1
+```
 
 ## Reflections
+This lab taught me a great deal about testbenches. The use of OOP inside HVM makes testbenches much more modular and the code in them much more re-useable. The self checking nature of this testbench also made it that the testbench was able to pick up a bug that the testbench that I had written for the previous lab was not able to detect. The stimulus generator and scoreboard are both modules that could with some minor alterations to the tasks be used again for a future lab. The intentional bug insertion was also very beneficial, although not uncovering any bugs in the design or the testbench it shows that the testbench works and that confidence can be placed in it. The lab as a whole was very beneficial and I feel that I have learned a lot from it.

@@ -40,7 +40,8 @@ module scoreboard (
         prev_dec_exp <= dec_exp;
     end
 
-    always @(posedge inc_exp or posedge dec_exp) begin
+    // always @(count) begin // Reduced verbosity sensitivity list
+    always @(inc_act or dec_act or count) begin
         if (local_count != count || inc_act != inc_exp || dec_act != dec_exp) begin
             $fwrite(file, "FAIL: Count: %0d, Local Count: %0d, a: %0d, b: %0d, inc_act: %0d, dec_act: %0d, Expected inc: %0d, Expected dec: %0d\n", count, local_count, a, b, inc_act, dec_act, inc_exp, dec_exp);
             $fflush(file);
