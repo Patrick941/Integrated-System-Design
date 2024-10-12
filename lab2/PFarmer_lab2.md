@@ -1,7 +1,7 @@
 ---
-title: "Lab 1: Sequential Circuits and FSM"
+title: "Lab 2: Advanced Testbenches"
 author: "Patrick Farmer 20331828"
-date: "2023-10-01"
+date: "2024-07-10"
 ---
 
 ![](https://www.tcd.ie/media/tcd/site-assets/images/tcd-logo.png)
