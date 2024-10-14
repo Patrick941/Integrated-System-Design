@@ -11,39 +11,59 @@ filterCoefficients = firpm(50, frequencyVector, amplitudeVector);
 
 quantizationLevels = [4, 8, 16];
 
-[h, w] = freqz(filterCoefficients, 1, 1024, samplingFrequency);
+[frequencyResponse, frequencyAxis] = freqz(filterCoefficients, 1, 1024, samplingFrequency);
 
 figure;
-subplot(length(quantizationLevels) + 1, 1, 1);
-plot(w, 20*log10(abs(h)));
+subplot(length(quantizationLevels) + 2, 1, 1);
+plot(frequencyAxis, 20*log10(abs(frequencyResponse)));
 title('Magnitude Response - Full Precision');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude (dB)');
 
-for i = 1:length(quantizationLevels)
-    numBits = quantizationLevels(i);
-    quantizedCoefficients = round(filterCoefficients * (2^(numBits-1))) / (2^(numBits-1));
-    
-    [hQuantized, w] = freqz(quantizedCoefficients, 1, 1024, samplingFrequency);
-    
-    subplot(length(quantizationLevels) + 1, 1, i + 1);
-    plot(w, 20*log10(abs(hQuantized)));
-    title(['Magnitude Response - ', num2str(numBits), ' Bits']);
-    xlabel('Frequency (Hz)');
-    ylabel('Magnitude (dB)');
-end
+[audioData, audioSamplingFrequency] = audioread('../AudioFiles/speech_11.wav');
 
-saveas(gcf, '../quantized_magnitude_response.png');
-
-[audioData, audioSamplingFrequency] = audioread('../speech_11.wav');
+[originalFrequencyResponse, originalFrequencyAxis] = freqz(audioData, 1, 1024, audioSamplingFrequency);
+subplot(length(quantizationLevels) + 2, 1, 2);
+plot(originalFrequencyAxis, 20*log10(abs(originalFrequencyResponse)));
+title('Magnitude Response - Original Audio');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude (dB)');
 
 filteredAudioDataFullPrecision = filter(filterCoefficients, 1, audioData);
-audiowrite('../filtered_audio_full_precision.wav', filteredAudioDataFullPrecision, audioSamplingFrequency);
+audiowrite('../AudioFiles/filtered_audio_full_precision.wav', filteredAudioDataFullPrecision, audioSamplingFrequency);
 
 for i = 1:length(quantizationLevels)
     numBits = quantizationLevels(i);
     quantizedCoefficients = round(filterCoefficients * (2^(numBits-1))) / (2^(numBits-1));
     
     filteredAudioDataQuantized = filter(quantizedCoefficients, 1, audioData);
-    audiowrite(['../filtered_audio_', num2str(numBits), '_bits.wav'], filteredAudioDataQuantized, audioSamplingFrequency);
+    audiowrite(['../AudioFiles/filtered_audio_', num2str(numBits), '_bits.wav'], filteredAudioDataQuantized, audioSamplingFrequency);
+    
+    [quantizedFrequencyResponse, quantizedFrequencyAxis] = freqz(filteredAudioDataQuantized, 1, 1024, audioSamplingFrequency);
+    
+    subplot(length(quantizationLevels) + 2, 1, i + 2);
+    plot(quantizedFrequencyAxis, 20*log10(abs(quantizedFrequencyResponse)));
+    title(['Magnitude Response - ', num2str(numBits), ' Bits']);
+    xlabel('Frequency (Hz)');
+    ylabel('Magnitude (dB)');
 end
+
+saveas(gcf, '../Images/quantized_magnitude_response_comparison.png');
+
+originalAudioFFT = abs(fft(audioData));
+filteredAudioFFT = abs(fft(filteredAudioDataFullPrecision));
+frequencyAxisFFT = linspace(0, audioSamplingFrequency, length(originalAudioFFT));
+
+figure;
+subplot(2,1,1);
+plot(frequencyAxisFFT, originalAudioFFT);
+title('Frequency Spectrum of Original Audio');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+
+subplot(2,1,2);
+plot(frequencyAxisFFT, filteredAudioFFT);
+title('Frequency Spectrum of Filtered Audio');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+saveas(gcf, '../Images/frequency_spectrum_comparison.png');
