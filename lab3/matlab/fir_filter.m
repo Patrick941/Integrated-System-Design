@@ -1,6 +1,23 @@
+[audioData, audioSamplingFrequency] = audioread('../AudioFiles/speech_11.wav');
+nfft = 2^10;
+audioDataFFT = fft(audioData, nfft);
+frequencyStep = audioSamplingFrequency / nfft;
+frequencyVector = frequencyStep * (0:nfft/2-1);
+frequencyResponse = 2 * abs(audioDataFFT(1:nfft/2));
+figure;
+plot(frequencyVector, frequencyResponse);
+title('Single-Sided Amplitude Spectrum of x(t)');
+xlabel('Frequency (Hz)');
+ylabel('|X(f)|');
+
+[~, maxFrequencyIndex] = max(frequencyResponse);
+identifiedNoiseFrequency = frequencyVector(maxFrequencyIndex);
+disp(['Identified noise frequency: ', num2str(identifiedNoiseFrequency), ' Hz']);
+
+
 samplingFrequency = 20000;
-passbandFrequency = 500;
-stopbandFrequency = 400;
+passbandFrequency = 2 * identifiedNoiseFrequency;
+stopbandFrequency = identifiedNoiseFrequency + ( identifiedNoiseFrequency / 3) ;
 passbandRipple = 0.02;
 stopbandAttenuation = 90;
 
@@ -9,7 +26,7 @@ amplitudeVector = [0 0 1 1];
 
 filterCoefficients = firpm(50, frequencyVector, amplitudeVector);
 
-quantizationLevels = [4, 8, 16];
+quantizationLevels = [2, 4, 8];
 
 [frequencyResponse, frequencyAxis] = freqz(filterCoefficients, 1, 1024, samplingFrequency);
 
