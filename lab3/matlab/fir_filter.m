@@ -1,4 +1,7 @@
+% Read the audio file 
 [audioData, audioSamplingFrequency] = audioread('../AudioFiles/speech_11.wav');
+
+% Compute the FFT using the provided code and then plot the frequency response
 nfft = 2^10;
 audioDataFFT = fft(audioData, nfft);
 frequencyStep = audioSamplingFrequency / nfft;
@@ -10,63 +13,72 @@ title('Single-Sided Amplitude Spectrum of x(t)');
 xlabel('Frequency (Hz)');
 ylabel('|X(f)|');
 
+% Identify the noise frequency and print it
 [~, maxFrequencyIndex] = max(frequencyResponse);
 identifiedNoiseFrequency = frequencyVector(maxFrequencyIndex);
 disp(['Identified noise frequency: ', num2str(identifiedNoiseFrequency), ' Hz']);
 
-
+% Set the FIR filter parameters
 samplingFrequency = 20000;
 passbandFrequency = 2 * identifiedNoiseFrequency;
 stopbandFrequency = identifiedNoiseFrequency + ( identifiedNoiseFrequency / 3) ;
 passbandRipple = 0.02;
 stopbandAttenuation = 90;
 
+% Convert the filter parameters to the format required by the firpm function
 frequencyVector = [0 stopbandFrequency passbandFrequency samplingFrequency/2] / (samplingFrequency/2);
 amplitudeVector = [0 0 1 1];
 
 filterCoefficients = firpm(50, frequencyVector, amplitudeVector);
 
-quantizationLevels = [2, 4, 8];
+% Set the different levels of quantisation to be used
+quantisationLevels = [2, 4, 8];
 
+% Add the magnitude response of the filter to the plot
 [frequencyResponse, frequencyAxis] = freqz(filterCoefficients, 1, 1024, samplingFrequency);
-
 figure;
-subplot(length(quantizationLevels) + 2, 1, 1);
+subplot(length(quantisationLevels) + 2, 1, 1);
 plot(frequencyAxis, 20*log10(abs(frequencyResponse)));
 title('Magnitude Response - Full Precision');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude (dB)');
 
+% Add the magnitude response of the original audio to the plot
 [audioData, audioSamplingFrequency] = audioread('../AudioFiles/speech_11.wav');
-
 [originalFrequencyResponse, originalFrequencyAxis] = freqz(audioData, 1, 1024, audioSamplingFrequency);
-subplot(length(quantizationLevels) + 2, 1, 2);
+subplot(length(quantisationLevels) + 2, 1, 2);
 plot(originalFrequencyAxis, 20*log10(abs(originalFrequencyResponse)));
 title('Magnitude Response - Original Audio');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude (dB)');
 
+% Filter the audio using the filter and save the audio file
 filteredAudioDataFullPrecision = filter(filterCoefficients, 1, audioData);
 audiowrite('../AudioFiles/filtered_audio_full_precision.wav', filteredAudioDataFullPrecision, audioSamplingFrequency);
 
-for i = 1:length(quantizationLevels)
-    numBits = quantizationLevels(i);
-    quantizedCoefficients = round(filterCoefficients * (2^(numBits-1))) / (2^(numBits-1));
+% Quantise the filter coefficients and filter the audio with them
+for i = 1:length(quantisationLevels)
+    % Get quantised filter coefficients
+    numBits = quantisationLevels(i);
+    quantisedCoefficients = round(filterCoefficients * (2^(numBits-1))) / (2^(numBits-1));
     
-    filteredAudioDataQuantized = filter(quantizedCoefficients, 1, audioData);
-    audiowrite(['../AudioFiles/filtered_audio_', num2str(numBits), '_bits.wav'], filteredAudioDataQuantized, audioSamplingFrequency);
+    % Add the magnitude response of the quantised filter to the plot and write the audio file
+    filteredAudioDataQuantised = filter(quantisedCoefficients, 1, audioData);
+    audiowrite(['../AudioFiles/filtered_audio_', num2str(numBits), '_bits.wav'], filteredAudioDataQuantised, audioSamplingFrequency);
     
-    [quantizedFrequencyResponse, quantizedFrequencyAxis] = freqz(filteredAudioDataQuantized, 1, 1024, audioSamplingFrequency);
+    [quantisedFrequencyResponse, quantisedFrequencyAxis] = freqz(filteredAudioDataQuantised, 1, 1024, audioSamplingFrequency);
     
-    subplot(length(quantizationLevels) + 2, 1, i + 2);
-    plot(quantizedFrequencyAxis, 20*log10(abs(quantizedFrequencyResponse)));
+    subplot(length(quantisationLevels) + 2, 1, i + 2);
+    plot(quantisedFrequencyAxis, 20*log10(abs(quantisedFrequencyResponse)));
     title(['Magnitude Response - ', num2str(numBits), ' Bits']);
     xlabel('Frequency (Hz)');
     ylabel('Magnitude (dB)');
 end
 
-saveas(gcf, '../Images/quantized_magnitude_response_comparison.png');
+% Save all the graphs from the plot to one image
+saveas(gcf, '../Images/quantised_magnitude_response_comparison.png');
 
+% Plot the frequency spectrum of the original and filtered audio
 originalAudioFFT = abs(fft(audioData));
 filteredAudioFFT = abs(fft(filteredAudioDataFullPrecision));
 frequencyAxisFFT = linspace(0, audioSamplingFrequency, length(originalAudioFFT));
