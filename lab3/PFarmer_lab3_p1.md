@@ -38,6 +38,11 @@ stopbandAttenuation = 90;
 
 When the code was run with this filter the output audio file had the tone removed and the voice was clear.
 #### Quantising the Filter
-The final step was the quantise the filter coefficients to determine whether the output was under-quantised, correctly-quantised or over-quantised.
+The final step was to quantise the filter coefficients to determine whether the output was under-quantised, correctly-quantised or over-quantised.
+Quantisation is the process of mapping the filter coefficients to a limited set of values. The amount of bits determines the amount of values in the set. The filter coefficients are then rounded to the nearest value in the set.\
+Over-quantisation is when the filter coefficients are have been quantised into too small a set space, in the case of this lab that was at 4 bits with even more pronounced effects at 2 bits. The result of an over-quantised filter is that the output audio file has not got the tone removed.\
+Under-quantisation is when the filter coefficients have been quantised into too large a set space, the result of this is no different from the result of a correctly-quantised filter but there is an unnecessary increase in resource usage. In the case of this lab that was at 16 bits.\
+Correct-quantisation is when the filter coefficients have been quantised into the smallest possible set space where the result of the filter still produces the desired results. This produces the correct result with the lowest possible resource usage. In the case of this lab that was at 8 bits.
+
 
 ### Reflections

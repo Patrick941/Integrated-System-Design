@@ -32,7 +32,7 @@ amplitudeVector = [0 0 1 1];
 filterCoefficients = firpm(50, frequencyVector, amplitudeVector);
 
 % Set the different levels of quantisation to be used
-quantisationLevels = [2, 4, 8];
+quantisationLevels = [2, 4, 8, 16];
 
 % Add the magnitude response of the filter to the plot
 [frequencyResponse, frequencyAxis] = freqz(filterCoefficients, 1, 1024, samplingFrequency);
