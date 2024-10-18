@@ -31,7 +31,7 @@ The first step was to identify the frequency of the noise. This was done in two 
 The second way was to use the FFT function in matlab to find the frequency of the noise. This was done by taking the FFT of the audio file and then finding the frequency with the highest amplitude, this gave use the frequency of the tone which was then printed to terminal.
 
 #### Designing the FIR Filter
-After using the FIR filter designer tool in the previous step I decided to instead use the firpm function in matlab to design the filter after changing the specifications of the filter instead as this gave me the ability to iterate on the filter design much quicker. This also gave me the ability to take the identified tone frequency as a parameter in the calculation of the FIR filter specifications which would benefit code re-usability if ever repurposed. The final filter was designed with the following specifications:
+After using the FIR filter designer tool in the previous step I decided to instead use the firpm function in matlab to design the filter after changing the specifications of the filter instead as this gave me the ability to iterate on the filter design much quicker. This also gave me the ability to take the identified tone frequency as a parameter in the calculation of the FIR filter specifications which would benefit code re-usability if ever repurposed. The final filter was a low pass filter and was designed with the following specifications:
 
 ```matlab
 samplingFrequency = 20000;
@@ -40,6 +40,11 @@ stopbandFrequency = identifiedNoiseFrequency + ( identifiedNoiseFrequency / 3) ;
 passbandRipple = 0.02;
 stopbandAttenuation = 90;
 ```
+
+The transition region for this filter with a noise frequency of 178 hz was approximately 120hz which was large enough to ensure that matlab would not have any issues and that the filter would work effectively. \
+The FIR filter was designed using the firpm function which has a linear phase response. This means that the phase shift across frequencies is directly proportional to frequency, meaning that all frequencies within the passband have the same delay. This helps prevent phase distortion of the speech signal. \
+
+When the filter was applied, the output audio file had the tone removed, and the voice was clear, as shown in the frequency response graphs for the pre- and post-filtered audio files:
 
 When the code was run with this filter the output audio file had the tone removed and the voice was clear. This can be seen from the frequency response graph of the pre and post filtered audio files:\
 ![](./Images/frequency_spectrum_comparison.png)
