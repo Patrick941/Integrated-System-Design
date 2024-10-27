@@ -12,5 +12,5 @@ popd
 pushd $project_dir
 mv *.bit $working_dir/bitstream/top.bit
 mv *.hwh $working_dir/bitstream/top.hwh
-# rm -rf lab*
+rm -rf lab*
 popd
