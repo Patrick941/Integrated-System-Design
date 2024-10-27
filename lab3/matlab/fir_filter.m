@@ -1,5 +1,5 @@
 % Read the audio file 
-[audioData, audioSamplingFrequency] = audioread('../AudioFiles/speech_11.wav');
+[audioData, audioSamplingFrequency] = audioread('../AudioFiles/audio_lab2.wav');
 
 % Compute the FFT using the provided code and then plot the frequency response
 nfft = 2^10;
@@ -20,8 +20,8 @@ disp(['Identified noise frequency: ', num2str(identifiedNoiseFrequency), ' Hz'])
 
 % Set the FIR filter parameters
 samplingFrequency = 20000;
-passbandFrequency = 2 * identifiedNoiseFrequency;
-stopbandFrequency = identifiedNoiseFrequency + ( identifiedNoiseFrequency / 3) ;
+passbandFrequency = 150;
+stopbandFrequency = 95;
 passbandRipple = 0.02;
 stopbandAttenuation = 90;
 
@@ -30,6 +30,11 @@ frequencyVector = [0 stopbandFrequency passbandFrequency samplingFrequency/2] / 
 amplitudeVector = [0 0 1 1];
 
 filterCoefficients = firpm(50, frequencyVector, amplitudeVector);
+
+% Write the filter coefficients to a file
+fileID = fopen('../filterCoefficients.txt', 'w');
+fprintf(fileID, '%f\n', filterCoefficients);
+fclose(fileID);
 
 % Set the different levels of quantisation to be used
 quantisationLevels = [2, 4, 8, 16];
@@ -43,8 +48,6 @@ title('Magnitude Response - Full Precision');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude (dB)');
 
-% Add the magnitude response of the original audio to the plot
-[audioData, audioSamplingFrequency] = audioread('../AudioFiles/speech_11.wav');
 [originalFrequencyResponse, originalFrequencyAxis] = freqz(audioData, 1, 1024, audioSamplingFrequency);
 subplot(length(quantisationLevels) + 2, 1, 2);
 plot(originalFrequencyAxis, 20*log10(abs(originalFrequencyResponse)));
