@@ -30,11 +30,11 @@ frequencyVector = [0 stopbandFrequency passbandFrequency samplingFrequency/2] / 
 amplitudeVector = [0 0 1 1];
 
 filterCoefficients = firpm(50, frequencyVector, amplitudeVector);
+fixedPointFilter = dfilt.dffir(filterCoefficients);
+set(fixedPointFilter, 'arithmetic', 'fixed');
 
-% Write the filter coefficients to a file
-fileID = fopen('../filterCoefficients.txt', 'w');
-fprintf(fileID, '%f\n', filterCoefficients);
-fclose(fileID);
+% Write the coefficients to a COE file
+coewrite(fixedPointFilter, 10, '../outputs/filter_coefficients.coe');
 
 % Set the different levels of quantisation to be used
 quantisationLevels = [2, 4, 8, 16];
