@@ -20,8 +20,8 @@ disp(['Identified noise frequency: ', num2str(identifiedNoiseFrequency), ' Hz'])
 
 % Set the FIR filter parameters
 samplingFrequency = 20000;
-passbandFrequency = 400;
-stopbandFrequency = 250;
+passbandFrequency = 180;
+stopbandFrequency = 120;
 passbandRipple = 0.02;
 stopbandAttenuation = 90;
 
@@ -29,7 +29,7 @@ stopbandAttenuation = 90;
 frequencyVector = [0 stopbandFrequency passbandFrequency samplingFrequency/2] / (samplingFrequency/2);
 amplitudeVector = [0 0 1 1];
 
-filterCoefficients = firpm(50, frequencyVector, amplitudeVector);
+filterCoefficients = firpm(40, frequencyVector, amplitudeVector);
 fixedPointFilter = dfilt.dffir(filterCoefficients);
 set(fixedPointFilter, 'arithmetic', 'fixed');
 
