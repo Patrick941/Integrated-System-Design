@@ -20,8 +20,8 @@ disp(['Identified noise frequency: ', num2str(identifiedNoiseFrequency), ' Hz'])
 
 % Set the FIR filter parameters
 samplingFrequency = 20000;
-passbandFrequency = 150;
-stopbandFrequency = 95;
+passbandFrequency = 400;
+stopbandFrequency = 250;
 passbandRipple = 0.02;
 stopbandAttenuation = 90;
 
