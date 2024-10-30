@@ -1,7 +1,7 @@
 % Read the audio file 
 [audioData, audioSamplingFrequency] = audioread('../AudioFiles/audio_lab2.wav');
 
-% Compute the FFT using the provided code and then plot the frequency response
+% Compute the FFT and plot the frequency response
 nfft = 2^10;
 audioDataFFT = fft(audioData, nfft);
 frequencyStep = audioSamplingFrequency / nfft;
@@ -19,24 +19,26 @@ identifiedNoiseFrequency = frequencyVector(maxFrequencyIndex);
 disp(['Identified noise frequency: ', num2str(identifiedNoiseFrequency), ' Hz']);
 
 % Set the FIR filter parameters
-samplingFrequency = 20000;
-passbandFrequency = 180;
-stopbandFrequency = 120;
-passbandRipple = 0.02;
-stopbandAttenuation = 90;
+samplingFrequency = 20000; % Use the correct sampling frequency
+stopbandFrequency = 94;     % Stopband at the noise frequency
+passbandFrequency = 120;    % Passband frequency above the noise frequency
+passbandRipple = 0.02;      % Maximum allowable ripple in the passband
+stopbandAttenuation = 90;   % Minimum attenuation in the stopband
 
 % Convert the filter parameters to the format required by the firpm function
 frequencyVector = [0 stopbandFrequency passbandFrequency samplingFrequency/2] / (samplingFrequency/2);
-amplitudeVector = [0 0 1 1];
+amplitudeVector = [0 0 1 1]; % Amplitude response: 0 in stopband, 1 in passband
 
-filterCoefficients = firpm(40, frequencyVector, amplitudeVector);
+% Increase filter order for better performance
+filterOrder = 80; % Increase the filter order
+filterCoefficients = firpm(filterOrder, frequencyVector, amplitudeVector);
 fixedPointFilter = dfilt.dffir(filterCoefficients);
 set(fixedPointFilter, 'arithmetic', 'fixed');
 
 % Write the coefficients to a COE file
 coewrite(fixedPointFilter, 10, '../outputs/filter_coefficients.coe');
 
-% Set the different levels of quantisation to be used
+% Set different levels of quantization to be used
 quantisationLevels = [2, 4, 8, 16];
 
 % Add the magnitude response of the filter to the plot
@@ -59,13 +61,13 @@ ylabel('Magnitude (dB)');
 filteredAudioDataFullPrecision = filter(filterCoefficients, 1, audioData);
 audiowrite('../AudioFiles/filtered_audio_full_precision.wav', filteredAudioDataFullPrecision, audioSamplingFrequency);
 
-% Quantise the filter coefficients and filter the audio with them
+% Quantize the filter coefficients and filter the audio with them
 for i = 1:length(quantisationLevels)
-    % Get quantised filter coefficients
+    % Get quantized filter coefficients
     numBits = quantisationLevels(i);
     quantisedCoefficients = round(filterCoefficients * (2^(numBits-1))) / (2^(numBits-1));
     
-    % Add the magnitude response of the quantised filter to the plot and write the audio file
+    % Filter the audio with quantized coefficients and save the audio file
     filteredAudioDataQuantised = filter(quantisedCoefficients, 1, audioData);
     audiowrite(['../AudioFiles/filtered_audio_', num2str(numBits), '_bits.wav'], filteredAudioDataQuantised, audioSamplingFrequency);
     
