@@ -101,3 +101,45 @@ title('Frequency Spectrum of Filtered Audio');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 saveas(gcf, '../Images/frequency_spectrum_comparison.png');
+
+filteredAudioData = filter(filterCoefficients, 1, audioData);
+
+% Downsample both the audio data and the time vector
+downsampleFactor = 1;  % Adjust this factor as needed for fewer points
+downsampledAudioData = downsample(filteredAudioData, downsampleFactor);
+downsampledTimeVector = downsample((0:length(filteredAudioData)-1) / audioSamplingFrequency, downsampleFactor);
+
+% Create figure with specified aspect ratio
+figure('Position', [100, 100, 1200, 300]); % Aspect ratio ~4:1
+
+% Plot the downsampled filtered audio signal in the time domain
+plot(downsampledTimeVector, downsampledAudioData, 'Color', [0.8, 0.8, 0], 'LineWidth', 1.5); % Yellow color for HW Filter with increased line size
+title('Audio in Time Domain (Channel 0)');
+xlabel('Time in s');
+ylabel('Amplitude');
+legend('HW Filter');
+
+% Save the plot as an image
+saveas(gcf, '../Images/hardwareFilterChannel0.png');
+
+% Zero the data for the last 0.5 seconds
+zeroedAudioData = filteredAudioData;
+zeroedAudioData(end - round(0.5 * audioSamplingFrequency) + 1:end) = 0;
+
+% Downsample both the zeroed audio data and the time vector
+downsampledZeroedAudioData = downsample(zeroedAudioData, downsampleFactor);
+downsampledZeroedTimeVector = downsample((0:length(zeroedAudioData)-1) / audioSamplingFrequency, downsampleFactor);
+
+% Create figure with specified aspect ratio
+figure('Position', [100, 100, 1200, 300]); % Aspect ratio ~4:1
+
+% Plot the downsampled zeroed filtered audio signal in the time domain
+plot(downsampledZeroedTimeVector, downsampledZeroedAudioData, 'Color', [0.8, 0.8, 0], 'LineWidth', 1.5); % Yellow color for HW Filter with increased line size
+title('Audio in Time Domain (Channel 1)');
+xlabel('Time in s');
+ylabel('Amplitude');
+legend('HW Filter');
+
+% Save the plot as an image
+saveas(gcf, '../Images/hardwareFilterChannel1.png');
+saveas(gcf, '../Images/simulatedFilter.png');

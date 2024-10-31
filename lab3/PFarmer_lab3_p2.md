@@ -100,8 +100,21 @@ This will open the block diagram which has to be done via the GUI then make the 
 
 ### Audio Graphs (Pre and Post Filter)
 
+Graphs were generated automatically by the provided pynb scripts. The graphs show the audio against time for the original audio and the filtered audio for both the hardware and software filters. The graphs are shown below:
+
+![](Images/originalAudioChannel0.png){width=50%}
+![](Images/originalAudioChannel1.png){width=50%}
+![](Images/hardwareFilterChannel0.png){width=50%}
+![](Images/hardwareFilterChannel1.png){width=50%}
+![](Images/simulatedFilter.png){width=50%}\
+
+Each of the graphs look reasonably similar but we can see that there is a significant reduction in the noise of the filtered audio. We can see no difference between the hardware and software filter outputs. There appear to be almost if not completely identical.
+
 ### Hardware vs Software filter comparison
 
-#### Results
+Although the output of the software and hardware filter is very similar the time it took them to perform the operation is significantly different. The hardware filter took only 0.058 seconds to process the audio while the software filter took 0.38 seconds. This is over a 5x speedup which although not too significant for such a small file could be very significant for larger files whether that be longer or higher quality audio files. The hardware filter is also massively more power-efficient than the software filter but this is a difficult metric to measure.\
+The hardware filter would be much more useful in a live application where the audio is processed in real-time. The software filter for its simplicity and ease of use may be more useful for small-scale applications.
 
-#### Discussion
+#### Results/Discussion
+
+#### Reflections
