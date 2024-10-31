@@ -19,11 +19,11 @@ identifiedNoiseFrequency = frequencyVector(maxFrequencyIndex);
 disp(['Identified noise frequency: ', num2str(identifiedNoiseFrequency), ' Hz']);
 
 % Set the FIR filter parameters
-samplingFrequency = 20000; % Use the correct sampling frequency
-stopbandFrequency = 94;     % Stopband at the noise frequency
-passbandFrequency = 120;    % Passband frequency above the noise frequency
-passbandRipple = 0.02;      % Maximum allowable ripple in the passband
-stopbandAttenuation = 120;   % Minimum attenuation in the stopband
+samplingFrequency = 20000;
+stopbandFrequency = 94;
+passbandFrequency = 120;
+passbandRipple = 0.02;
+stopbandAttenuation = 120;
 
 % Convert the filter parameters to the format required by the firpm function
 frequencyVector = [0 stopbandFrequency passbandFrequency samplingFrequency/2] / (samplingFrequency/2);

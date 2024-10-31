@@ -30,6 +30,8 @@ set_property -dict [list \
 ] [get_bd_cells fir_compiler_0]
 endgroup
 
+save_bd_design
+
 write_bd_layout -format pdf -orientation landscape $working_dir/outputs/block_diagram.pdf -force
 stop_gui
 
