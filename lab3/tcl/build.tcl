@@ -18,7 +18,7 @@ open_bd_design lab.srcs/sources_1/bd/base_filter/base_filter.bd
 startgroup
 set_property -dict [list \
     CONFIG.CoefficientSource {COE_File} \
-    CONFIG.Coefficient_File {/home/patrick/Documents/Year5Semester1/IntegratedSystemDesign/labs/lab3/outputs/filter_coefficients.coe} \
+    CONFIG.Coefficient_File {/home/patrick/Documents/IntegratedSystemsDesign/labs/lab3/outputs/filter_coefficients.coe} \
     CONFIG.Coefficient_Fractional_Bits {0} \
     CONFIG.Coefficient_Sets {1} \
     CONFIG.Coefficient_Sign {Signed} \
